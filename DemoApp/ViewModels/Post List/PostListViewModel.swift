@@ -37,10 +37,11 @@ class PostListViewModel: ObservableObject {
                 PostViewModel(with: $0)
             }
         }
+
     }
 }
 
-struct UserListViewModel {
+struct UserListItemViewModel {
     let requestClient: RequestClient<[User]>
 
     init(_ requestClient: RequestClient<[User]> = RequestClient(with: User.requestParam)) {

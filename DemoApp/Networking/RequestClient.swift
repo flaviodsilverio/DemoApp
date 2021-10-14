@@ -28,8 +28,8 @@ class RequestClient<T> where T: Decodable  {
         fetch(completion: completion)
     }
 
-    func fetchItem(with id: String, _ completion: requestCompletion) {
-        fetch(appending: id, completion: completion)
+    func fetchItem(with path: String, _ completion: requestCompletion) {
+        fetch(appending: path, completion: completion)
     }
 
     private func fetch(appending string: String? = nil, completion: requestCompletion) {

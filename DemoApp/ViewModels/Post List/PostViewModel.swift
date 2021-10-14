@@ -18,7 +18,7 @@ class PostViewModel: ObservableObject, Identifiable {
         post.title
     }()
 
-    private let post: Post
+    let post: Post
 
     init(with post: Post) {
         self.post = post
