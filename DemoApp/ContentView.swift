@@ -7,16 +7,47 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct PostListView: View {
+    @ObservedObject var viewModel = PostListViewModel()
 
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            List(viewModel.childViewModels) { childVM in
+                    NavigationLink(destination: PostDetailsView()) {
+                        PostView(with: childVM)
+
+                }
+            }
+            .navigationTitle(Constants.Strings.Titles.postList)
+        }
+    }
+}
+
+struct PostDetailsView: View {
+    var body: some View {
+        Text("Post Details")
+    }
+}
+
+struct PostView: View {
+    @ObservedObject var viewModel: PostViewModel
+
+    init(with viewModel: PostViewModel) {
+        self.viewModel = viewModel
+    }
+
+    var body: some View {
+        VStack {
+            Text(viewModel.title)
+                .font(Font.system(size: 24, weight: .heavy, design: .serif))
+                .multilineTextAlignment(.leading)
+            Text(viewModel.body)
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PostListView()
     }
 }

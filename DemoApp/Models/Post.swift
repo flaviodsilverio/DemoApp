@@ -13,3 +13,7 @@ struct Post: Decodable {
     let title: String
     let body: String
 }
+
+extension Post: Requestable {
+    static let requestParam: String = Constants.Strings.posts
+}

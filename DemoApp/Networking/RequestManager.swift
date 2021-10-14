@@ -20,12 +20,21 @@ class RequestManager {
 
     init(with session: URLSession = .shared) {
         self.session = session
+
+        perform(requestWith: Constants.Strings.baseURLPath + Constants.Strings.comments) { result in
+            switch result {
+            case .success(let object):
+                print(object)
+            case .failure(let error):
+                debugPrint(error)
+            }
+        }
+
     }
 
-    func perform<T: Decodable>(
+    func perform(
         requestWith urlString: String,
-        responseType type: T.Type,
-        _ completion: ((Result<T, Error>)->())?) {
+        _ completion: ((Result<Data, Error>)->())?) {
 
         guard let url = URL(string: urlString) else {
             completion?(.failure(RequestManagerError.invalidURL))
@@ -51,14 +60,7 @@ class RequestManager {
                     return
                 }
 
-                do {
-                    let object = try JSONDecoder().decode(T.self, from: data)
-                    completion?(.success(object))
-
-                } catch {
-                    debugPrint(error)
-                }
-
+                completion?(.success(data))
 
             default:
                 completion?(.failure(RequestManagerError.invalidResponse))

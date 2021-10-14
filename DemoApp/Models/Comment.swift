@@ -14,3 +14,7 @@ struct Comment: Decodable {
     let body: String
     let email: String
 }
+
+extension Comment: Requestable {
+    static let requestParam: String = Constants.Strings.comments
+}

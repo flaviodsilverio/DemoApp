@@ -36,3 +36,7 @@ struct User: Decodable {
         }
     }
 }
+
+extension User: Requestable {
+    static let requestParam: String = Constants.Strings.users
+}
