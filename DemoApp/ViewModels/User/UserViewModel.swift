@@ -12,7 +12,7 @@ final class UserViewModel: ObservableObject {
     @Published private var user: User?
 
     lazy var authorDescription: String = {
-        return Strings.author + username  + " (\(email)"
+        return Strings.author + username  + " (\(email))"
     }()
 
     lazy var username: String = {

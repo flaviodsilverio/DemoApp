@@ -46,7 +46,9 @@ class UserViewModelTests: XCTestCase {
         let desiredOutput = Strings.author
         + TestUserProperties.username
         + " "
+        + "("
         + TestUserProperties.email
+        + ")"
 
         XCTAssertEqual(sut.authorDescription, desiredOutput)
     }

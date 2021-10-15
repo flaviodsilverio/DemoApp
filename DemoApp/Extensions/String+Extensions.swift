@@ -22,7 +22,7 @@ extension String {
     }
 
     static var empty: String {
-        return .empty
+        return ""
     }
 
     static var comma: String {
