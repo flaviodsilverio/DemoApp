@@ -15,5 +15,5 @@ struct Post: Decodable {
 }
 
 extension Post: Requestable {
-    static let requestParam: String = Constants.Strings.posts
+    static let requestParam: String = Strings.API.posts
 }

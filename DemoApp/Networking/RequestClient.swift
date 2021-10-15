@@ -13,7 +13,7 @@ class RequestClient<T> where T: Decodable  {
     let requestManager: RequestManager
     let parser: Parser
 
-    init(path basePath: String = Constants.Strings.baseURLPath,
+    init(path basePath: String = Strings.API.baseURLPath,
         with type: String,
         requestManager rManager: RequestManager = RequestManager(),
         dataParser parser: Parser = Parser()) {

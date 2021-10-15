@@ -22,8 +22,9 @@ struct PostListView: View {
                     PostListItemView(viewModel: childVM)
                 }
             }
-            .navigationTitle(Constants.Strings.Titles.postList)
+            .navigationTitle(Strings.Titles.postList)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

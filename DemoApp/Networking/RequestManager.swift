@@ -20,16 +20,6 @@ class RequestManager {
 
     init(with session: URLSession = .shared) {
         self.session = session
-
-        perform(requestWith: Constants.Strings.baseURLPath + Constants.Strings.comments) { result in
-            switch result {
-            case .success(let object):
-                print(object)
-            case .failure(let error):
-                debugPrint(error)
-            }
-        }
-
     }
 
     func perform(

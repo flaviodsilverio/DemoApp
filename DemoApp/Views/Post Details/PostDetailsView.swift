@@ -24,6 +24,6 @@ struct PostDetailsView: View {
             PostDetailsCommentsView(viewModel: viewModel)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Post Details")
+        .navigationTitle(Strings.Titles.postDetails)
     }
 }

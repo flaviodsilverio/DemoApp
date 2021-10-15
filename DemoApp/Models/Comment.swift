@@ -16,5 +16,5 @@ struct Comment: Decodable {
 }
 
 extension Comment: Requestable {
-    static let requestParam: String = Constants.Strings.comments
+    static let requestParam: String = Strings.API.comments
 }

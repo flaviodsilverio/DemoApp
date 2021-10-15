@@ -38,5 +38,5 @@ struct User: Decodable {
 }
 
 extension User: Requestable {
-    static let requestParam: String = Constants.Strings.users
+    static let requestParam: String = Strings.API.users
 }

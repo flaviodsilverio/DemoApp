@@ -37,7 +37,7 @@ struct UserDetailsView: View {
 
         }
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("User Details")
+        .navigationTitle(Strings.Titles.userDetails)
     }
 }
 

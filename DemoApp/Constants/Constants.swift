@@ -7,17 +7,17 @@
 
 import Foundation
 
-enum Constants {
-    enum Strings {
+enum Strings {
+    enum API {
         static let baseURLPath = "https://jsonplaceholder.typicode.com/"
         static let comments = "comments/"
         static let users = "users/"
         static let posts = "posts/"
+    }
 
-        enum Titles {
-            static let postList = "Post List"
-            static let userList = "User List"
-
-        }
+    enum Titles {
+        static let postList = "Post List"
+        static let postDetails = "Post Details"
+        static let userDetails = "User Details"
     }
 }

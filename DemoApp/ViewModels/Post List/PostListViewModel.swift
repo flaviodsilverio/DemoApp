@@ -25,7 +25,7 @@ class PostListViewModel: ObservableObject {
             case .success(let posts):
                 self.createChildViewModels(from: posts)
                 
-            case .failure(let error):
+            case .failure(_):
                 break
             }
         }
@@ -56,7 +56,7 @@ struct UserListItemViewModel {
             switch result {
             case .success(let users):
                 print(users)
-            case .failure(let error):
+            case .failure(_):
                 break
             }
         }
