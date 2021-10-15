@@ -13,7 +13,7 @@ struct PostDetailsCommentsView: View {
 
     var body: some View {
         VStack {
-            Text("All Comments")
+            Text(Strings.Titles.allComments)
                 .font(.title)
             List(viewModel.commentsViewModels) { viewModel in
                 CommentDetailView(email: viewModel.email,

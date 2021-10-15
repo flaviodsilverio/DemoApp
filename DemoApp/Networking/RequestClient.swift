@@ -34,7 +34,7 @@ class RequestClient<T> where T: Decodable  {
 
     private func fetch(appending string: String? = nil, completion: requestCompletion) {
 
-        let requestPath = basePath + (string  ?? "")
+        let requestPath = basePath + (string  ?? .empty)
         requestManager.perform(requestWith: requestPath) { result in
             switch result {
             case .success(let data):

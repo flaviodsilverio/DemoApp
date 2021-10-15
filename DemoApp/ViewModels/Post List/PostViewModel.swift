@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PostViewModel: ObservableObject, Identifiable {
+final class PostViewModel: ObservableObject, Identifiable {
     var id: String { post.id.description }
 
     lazy var body: String = {

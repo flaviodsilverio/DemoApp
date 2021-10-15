@@ -20,4 +20,12 @@ extension String {
         
         return String(number)
     }
+
+    static var empty: String {
+        return .empty
+    }
+
+    static var comma: String {
+        return ", "
+    }
 }

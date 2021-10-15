@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PostDetailsViewModel: ObservableObject {
+final class PostDetailsViewModel: ObservableObject {
     let userRequestClient: RequestClient<User>
     let commentsRequestClient: RequestClient<[Comment]>
 
@@ -39,7 +39,9 @@ class PostDetailsViewModel: ObservableObject {
     }
 
     func getPostComments() {
-        commentsRequestClient.fetchItem(with: "?postId=" + post.id.description) {
+        commentsRequestClient.fetchItem(
+            with: Strings.API.postIDPostfix + post.id.description
+        ) {
             result in
             switch result {
             case .success(let comments):

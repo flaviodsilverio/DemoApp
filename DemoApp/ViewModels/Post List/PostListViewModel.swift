@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PostListViewModel: ObservableObject {
+final class PostListViewModel: ObservableObject {
     let requestClient: RequestClient<[Post]>
 
     @Published var childViewModels: [PostViewModel] = []

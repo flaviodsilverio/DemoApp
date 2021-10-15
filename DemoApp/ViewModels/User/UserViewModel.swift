@@ -8,31 +8,31 @@
 import Foundation
 import MapKit
 
-class UserViewModel: ObservableObject {
+final class UserViewModel: ObservableObject {
     @Published private var user: User?
 
     lazy var authorDescription: String = {
-        return "Author: " + username  + " (\(email)"
+        return Strings.author + username  + " (\(email)"
     }()
 
     lazy var username: String = {
-        user?.username ?? ""
+        user?.username ?? .empty
     }()
 
     lazy var email: String = {
-        user?.email ?? ""
+        user?.email ?? .empty
     }()
 
     lazy var name: String = {
-        user?.name ?? ""
+        user?.name ?? .empty
     }()
 
     lazy var phone: String = {
-        user?.phone ?? ""
+        user?.phone ?? .empty
     }()
 
     lazy var website: String = {
-        user?.website ?? ""
+        user?.website ?? .empty
     }()
 
     lazy var address: String = {
@@ -40,18 +40,17 @@ class UserViewModel: ObservableObject {
               let suite = user?.address.suite,
               let city = user?.address.city
         else {
-            return ""
+            return .empty
         }
 
-        return street + ", " + suite + ", " + city
+        return street + .comma + suite + .comma + city
     }()
 
     lazy var region: MKCoordinateRegion = {
-        guard let lat = Double(user?.address.geo.lat ?? ""),
-              let long = Double(user?.address.geo.lng ?? "") else {
-                  fatalError()
-              }
 
+        // If there are no coordinates, show London
+        let lat = Double(user?.address.geo.lat ?? .empty) ?? 51.5074
+        let long = Double(user?.address.geo.lng ?? .empty) ?? 0.1278
 
         return MKCoordinateRegion(
         center: CLLocationCoordinate2D(
@@ -66,29 +65,29 @@ class UserViewModel: ObservableObject {
     }()
 
     lazy var postcode: String = {
-        user?.address.zipcode ?? ""
+        user?.address.zipcode ?? .empty
     }()
 
     lazy var latitude: Double = {
-        guard let lat = Double(user?.address.geo.lat ?? "")
+        guard let lat = Double(user?.address.geo.lat ?? .empty)
         else { return 0.0 }
 
         return lat
     }()
 
     lazy var longitude: Double = {
-        guard let long = Double(user?.address.geo.lng ?? "")
+        guard let long = Double(user?.address.geo.lng ?? .empty)
         else { return 0.0 }
 
         return long
     }()
 
     lazy var company: String = {
-        user?.company.name ?? ""
+        user?.company.name ?? .empty
     }()
 
     lazy var jobTitle: String = {
-        user?.company.bs ?? ""
+        user?.company.bs ?? .empty
     }()
 
     func setUser(_ user: User) {

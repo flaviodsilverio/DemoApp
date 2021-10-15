@@ -11,7 +11,7 @@ import SwiftUI
 struct PostDetailsPostView: View {
     @ObservedObject var viewModel: PostDetailsViewModel
     @State private var showShareSheet: Bool = false
-    @State var shareSheetItems: [Any] = ["Look at this awesome post!"]
+    @State var shareSheetItems: [Any] = [Strings.Titles.shareSheetTitle]
 
     init(with viewModel: PostDetailsViewModel) {
         self.viewModel = viewModel
@@ -31,7 +31,7 @@ struct PostDetailsPostView: View {
                 Button(action: {
                     self.showShareSheet.toggle()
                 }) {
-                    Image(systemName: "square.and.arrow.up")
+                    Image(systemName: Strings.ImageNames.shareButton)
                 }.sheet(isPresented: $showShareSheet, content: {
                     ActivityViewController(activityItems: self.$shareSheetItems)
                 })

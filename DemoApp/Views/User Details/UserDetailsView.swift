@@ -14,25 +14,51 @@ struct UserDetailsView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Personal Details")) {
-                UserDetailSimpleComponentView(label: "Name", value: viewModel.name)
-                UserDetailSimpleComponentView(label: "Username", value: viewModel.username)
-                UserDetailEmailComponentView(label: "Email", value: viewModel.email)
-                UserDetailPhoneView(label: "Phone", value: viewModel.phone)
-                UserDetailSimpleComponentView(label: "Website", value: viewModel.website)
+            Section(header: Text(Strings.Titles.personalDetails)) {
+                UserDetailSimpleComponentView(
+                    label: Strings.Titles.name,
+                    value: viewModel.name)
+
+                UserDetailSimpleComponentView(
+                    label: Strings.Titles.username,
+                    value: viewModel.username)
+
+                UserDetailEmailComponentView(
+                    label: Strings.Titles.email,
+                    value: viewModel.email)
+
+                UserDetailPhoneView(
+                    label: Strings.Titles.phone,
+                    value: viewModel.phone)
+
+                UserDetailSimpleComponentView(
+                    label: Strings.Titles.website,
+                    value: viewModel.website)
             }
 
-            Section(header: Text("Address")) {
-                UserDetailSimpleComponentView(label: "Address", value: viewModel.address)
-                UserDetailSimpleComponentView(label: "Postcode", value: viewModel.postcode)
+            Section(header: Text(Strings.Titles.address)) {
+                UserDetailSimpleComponentView(
+                    label: Strings.Titles.address,
+                    value: viewModel.address)
+
+                UserDetailSimpleComponentView(
+                    label: Strings.Titles.postcode,
+                    value: viewModel.postcode)
+
                 MapView(currentLocation: CurrentLocation(coordinate: CLLocationCoordinate2D(
                     latitude: viewModel.latitude,
-                    longitude: viewModel.longitude)), region:viewModel.region)
+                    longitude: viewModel.longitude)),
+                        region:viewModel.region)
             }
 
-            Section(header: Text("Employment")) {
-                UserDetailSimpleComponentView(label: "Employer", value: viewModel.company)
-                UserDetailSimpleComponentView(label: "Job Title", value: viewModel.jobTitle)
+            Section(header: Text(Strings.Titles.employment)) {
+                UserDetailSimpleComponentView(
+                    label: Strings.Titles.employer,
+                    value: viewModel.company)
+
+                UserDetailSimpleComponentView(
+                    label: Strings.Titles.jobDescription,
+                    value: viewModel.jobTitle)
             }
 
         }

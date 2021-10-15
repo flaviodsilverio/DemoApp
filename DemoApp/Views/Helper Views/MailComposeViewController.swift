@@ -17,10 +17,10 @@ class MailComposeViewController: UIViewController, MFMailComposeViewControllerDe
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients([recipient])
-            mail.setMessageBody("<p>Hello!</p>", isHTML: true)
+            mail.setMessageBody(Strings.helloParagraph, isHTML: true)
             UIApplication.shared.windows.first?.rootViewController?.present(mail, animated: true)
         } else {
-            // show failure alert
+            // Show alert error here
         }
     }
 
