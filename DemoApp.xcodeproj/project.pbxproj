@@ -26,6 +26,7 @@
 		1B99C74D2718998A0011BD70 /* PostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99C74C2718998A0011BD70 /* PostDetailsViewModel.swift */; };
 		1B99C7512718C0C40011BD70 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99C7502718C0C40011BD70 /* UIFont+Extensions.swift */; };
 		1B99C7542718D49B0011BD70 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99C7532718D49B0011BD70 /* UserViewModel.swift */; };
+		1B99C75627193CFB0011BD70 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99C75527193CFB0011BD70 /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		1B99C74C2718998A0011BD70 /* PostDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsViewModel.swift; sourceTree = "<group>"; };
 		1B99C7502718C0C40011BD70 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		1B99C7532718D49B0011BD70 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		1B99C75527193CFB0011BD70 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				1B99C7502718C0C40011BD70 /* UIFont+Extensions.swift */,
+				1B99C75527193CFB0011BD70 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				1B99C74D2718998A0011BD70 /* PostDetailsViewModel.swift in Sources */,
 				1B99C72E27176B080011BD70 /* RequestManager.swift in Sources */,
 				1B99C7352717790E0011BD70 /* Comment.swift in Sources */,
+				1B99C75627193CFB0011BD70 /* String+Extensions.swift in Sources */,
 				1B99C7422717F4140011BD70 /* Parser.swift in Sources */,
 				1B99C70727176A710011BD70 /* ContentView.swift in Sources */,
 				1B99C7512718C0C40011BD70 /* UIFont+Extensions.swift in Sources */,

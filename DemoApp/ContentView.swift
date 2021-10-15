@@ -61,6 +61,8 @@ struct PostDetailsView: View {
 
 struct PostDetailsPostView: View {
     @ObservedObject var viewModel: PostDetailsViewModel
+    @State private var showShareSheet: Bool = false
+    @State var shareSheetItems: [Any] = ["Look at this awesome post!"]
 
     init(with viewModel: PostDetailsViewModel) {
         self.viewModel = viewModel
@@ -75,6 +77,16 @@ struct PostDetailsPostView: View {
             }
 
             Text(viewModel.body).font(.body)
+        }.toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    self.showShareSheet.toggle()
+                }) {
+                    Image(systemName: "square.and.arrow.up")
+                }.sheet(isPresented: $showShareSheet, content: {
+                    ActivityViewController(activityItems: self.$shareSheetItems)
+                })
+            }
         }
     }
 
@@ -112,7 +124,10 @@ struct CommentDetailView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(email).font(.title)
+                Button(email) {
+                    MailComposeViewController.shared.sendEmail(to: email)
+                }
+                .font(.title)
                 Spacer()
             }
             HStack {
@@ -135,24 +150,24 @@ struct UserDetailsView: View {
     var body: some View {
         List {
             Section(header: Text("Personal Details")) {
-                UserDetailComponentView(label: "Name", value: viewModel.name)
-                UserDetailComponentView(label: "Username", value: viewModel.username)
-                UserDetailComponentView(label: "Email", value: viewModel.email)
-                UserDetailComponentView(label: "Phone", value: viewModel.phone)
-                UserDetailComponentView(label: "Website", value: viewModel.website)
+                UserDetailSimpleComponentView(label: "Name", value: viewModel.name)
+                UserDetailSimpleComponentView(label: "Username", value: viewModel.username)
+                UserDetailEmailComponentView(label: "Email", value: viewModel.email)
+                UserDetailPhoneView(label: "Phone", value: viewModel.phone)
+                UserDetailSimpleComponentView(label: "Website", value: viewModel.website)
             }
 
             Section(header: Text("Address")) {
-                UserDetailComponentView(label: "Address", value: viewModel.address)
-                UserDetailComponentView(label: "Postcode", value: viewModel.postcode)
+                UserDetailSimpleComponentView(label: "Address", value: viewModel.address)
+                UserDetailSimpleComponentView(label: "Postcode", value: viewModel.postcode)
                 MapView(currentLocation: CurrentLocation(coordinate: CLLocationCoordinate2D(
                     latitude: viewModel.latitude,
                     longitude: viewModel.longitude)), region:viewModel.region)
             }
 
             Section(header: Text("Employment")) {
-                UserDetailComponentView(label: "Employer", value: viewModel.company)
-                UserDetailComponentView(label: "Job Title", value: viewModel.jobTitle)
+                UserDetailSimpleComponentView(label: "Employer", value: viewModel.company)
+                UserDetailSimpleComponentView(label: "Job Title", value: viewModel.jobTitle)
             }
 
         }
@@ -161,7 +176,7 @@ struct UserDetailsView: View {
     }
 }
 
-struct UserDetailComponentView: View {
+struct UserDetailSimpleComponentView: View {
     var label: String
     var value: String
 
@@ -170,6 +185,38 @@ struct UserDetailComponentView: View {
             Text(label).font(.body)
             Spacer()
             Text(value).font(.body)
+        }
+    }
+}
+
+struct UserDetailEmailComponentView: View {
+    var label: String
+    var value: String
+
+    var body: some View {
+        HStack {
+            Text(label).font(.body)
+            Spacer()
+            Button(value) {
+                MailComposeViewController.shared.sendEmail(to: value)
+            }
+        }
+    }
+}
+
+struct UserDetailPhoneView: View {
+    var label: String
+    var value: String
+
+    var body: some View {
+        HStack {
+            Text(label).font(.body)
+            Spacer()
+            Button(String.numericString(from: value)) {
+                let numericString = String.numericString(from:  value)
+                guard let url = URL(string: "tel://" + numericString) else { return }
+                UIApplication.shared.open(url)
+            }
         }
     }
 }
@@ -192,4 +239,45 @@ struct MapView: View {
         }
         .frame(height: 200)
     }
+}
+
+import MessageUI
+
+class MailComposeViewController: UIViewController, MFMailComposeViewControllerDelegate {
+
+    static let shared = MailComposeViewController()
+
+    func sendEmail(to recipient: String) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([recipient])
+            mail.setMessageBody("<p>Hello!</p>", isHTML: true)
+            UIApplication.shared.windows.first?.rootViewController?.present(mail, animated: true)
+        } else {
+            // show failure alert
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+}
+
+
+struct ActivityViewController: UIViewControllerRepresentable {
+
+    @Binding var activityItems: [Any]
+    var excludedActivityTypes: [UIActivity.ActivityType]? = nil
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems,
+                                                  applicationActivities: nil)
+
+        controller.excludedActivityTypes = excludedActivityTypes
+
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
 }

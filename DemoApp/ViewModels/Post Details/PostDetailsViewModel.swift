@@ -71,7 +71,7 @@ class CommentViewModel: ObservableObject, Identifiable {
     private let comment: Comment
 
     lazy var email: String = {
-        comment.email + ":"
+        comment.email
     }()
 
     lazy var text: String = {
