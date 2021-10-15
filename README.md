@@ -17,6 +17,6 @@ Things of note:
 Lacking:
 - More tests. It doesn't have a massive amount of tests since there's not a lot of business logic. 
 - Error handling. There's plenty of custom errors, however they're not yet handled. 
-- No paging. Due to the reality of `https://jsonplaceholder.typicode.com` it didn't make a lot of sense to this project.
+- No paging. Due to the nature of `https://jsonplaceholder.typicode.com` it didn't make a lot of sense to this project.
 
 A video of the small app can be found here: https://streamable.com/kqsbb9
