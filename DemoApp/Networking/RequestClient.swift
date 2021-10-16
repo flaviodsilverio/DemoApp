@@ -35,10 +35,10 @@ class RequestClient<T> where T: Decodable  {
     private func fetch(appending string: String? = nil, completion: requestCompletion) {
 
         let requestPath = basePath + (string  ?? .empty)
-        requestManager.perform(requestWith: requestPath) { result in
+        requestManager.perform(requestWith: requestPath) { [weak self] result in
             switch result {
             case .success(let data):
-                guard let parsedData = self.parser.parse(data, ofType: T.self) else {
+                guard let parsedData = self?.parser.parse(data, ofType: T.self) else {
                     completion?(.failure(ParserError.unknown))
                     return
                 }

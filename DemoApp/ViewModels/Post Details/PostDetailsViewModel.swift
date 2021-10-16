@@ -42,13 +42,14 @@ final class PostDetailsViewModel: ObservableObject {
         commentsRequestClient.fetchItem(
             with: Strings.API.postIDPostfix + post.id.description
         ) {
-            result in
+            [weak self] result in
             switch result {
             case .success(let comments):
-                self.commentsViewModels = comments.map {
-                    CommentViewModel(with: $0)
-                }
 
+                DispatchQueue.main.async {
+                    self?.commentsViewModels = comments.map {
+                        CommentViewModel(with: $0)
+                    }                }
             case .failure(let error):
                 print(error)
             }
@@ -56,10 +57,12 @@ final class PostDetailsViewModel: ObservableObject {
     }
 
     func getPostUser() {
-        userRequestClient.fetchItem(with: post.userId.description) { result in
+        userRequestClient.fetchItem(with: post.userId.description) { [weak self] result in
             switch result {
             case .success(let user):
-                self.userViewModel.setUser(user)
+                DispatchQueue.main.async {
+                    self?.userViewModel.setUser(user)
+                }
             case .failure(let error):
                 print(error)
             }
